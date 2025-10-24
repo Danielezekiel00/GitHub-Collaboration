@@ -108,11 +108,13 @@ View all authors and their books at a glance.
 ![Authors Page](screenshots/authors.png)
 
 
-## Code Snippets
+# Code Snippets
 
 ## 🧩 Book Model – Relationship
+
 **File:** `app/Models/Book.php`
 
+This snippet shows the author relationship defined in the **Book** model.
 ```php
 protected $fillable = ['title', 'author_id', 'category', 'publication_year'];
 
@@ -120,16 +122,13 @@ public function author()
 {
     return $this->belongsTo(Author::class);
 }
-
-
-
+```
 
 ---
 
-```markdown
 ## 🔍 Search & Pagination in Controller
-**File:** `app/Http/Controllers/BookController.php`
 
+**File:** `app/Http/Controllers/BookController.php`
 ```php
 $books = Book::with('author')
     ->when($search, function ($query, $search) {
@@ -138,20 +137,18 @@ $books = Book::with('author')
                      ->orWhereHas('author', fn($q) => $q->where('name', 'like', "%{$search}%"));
     })
     ->paginate(10);
-
-
-
+```
 
 ---
 
-```markdown
 ## 📄 Pagination Links in Blade
-**File:** `resources/views/books/index.blade.php`
 
+**File:** `resources/views/books/index.blade.php`
 ```blade
 {{ $books->appends(['search' => $search])->links() }}
+```
 
-
+---
 
 
 ## Contributors
