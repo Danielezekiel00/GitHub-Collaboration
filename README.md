@@ -93,6 +93,8 @@ View all authors and their books at a glance.
 - Click "Add Book" to create a new book (select author and category).
 - Use pagination to navigate through multiple pages.
 
+## Screenshots
+
 ### Home Page (Library Overview)
 ![Home Page](screenshots/home.png)
 
@@ -104,3 +106,38 @@ View all authors and their books at a glance.
 
 ### Authors Management
 ![Authors Page](screenshots/authors.png)
+
+
+## Code Snippets
+**Book Model – Relationship**
+// app/Models/Book.php
+protected $fillable = ['title', 'author_id', 'category', 'publication_year'];
+
+public function author()
+{
+    return $this->belongsTo(Author::class);
+}
+
+
+**Search & Pagination in Controller**
+// app/Http/Controllers/BookController.php
+$books = Book::with('author')
+    ->when($search, function ($query, $search) {
+        return $query->where('title', 'like', "%{$search}%")
+                     ->orWhere('category', 'like', "%{$search}%")
+                     ->orWhereHas('author', fn($q) => $q->where('name', 'like', "%{$search}%"));
+    })
+    ->paginate(10);
+
+
+**Pagination Links in Blade**
+{{ $books->appends(['search' => $search])->links() }}
+
+
+
+## Contributors
+ - Full Name – DANIEL EZEKIEL M. DUCUSIN
+ - Student ID: 221-0145-2 | Section: 4-B
+
+
+
