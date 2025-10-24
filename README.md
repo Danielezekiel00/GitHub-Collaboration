@@ -121,7 +121,9 @@ public function author()
 }
 
 
-**Search & Pagination in Controller**
+```markdown
+### Search & Pagination in Controller
+```php
 // app/Http/Controllers/BookController.php
 $books = Book::with('author')
     ->when($search, function ($query, $search) {
@@ -132,7 +134,10 @@ $books = Book::with('author')
     ->paginate(10);
 
 
-**Pagination Links in Blade**
+
+```markdown
+### Pagination Links in Blade
+```blade
 {{ $books->appends(['search' => $search])->links() }}
 
 
