@@ -109,7 +109,9 @@ View all authors and their books at a glance.
 
 
 ## Code Snippets
-**Book Model – Relationship**
+
+### Book Model – Relationship
+```php
 // app/Models/Book.php
 protected $fillable = ['title', 'author_id', 'category', 'publication_year'];
 
@@ -138,6 +140,4 @@ $books = Book::with('author')
 ## Contributors
  - Full Name – DANIEL EZEKIEL M. DUCUSIN
  - Student ID: 221-0145-2 | Section: 4-B
-
-
 
