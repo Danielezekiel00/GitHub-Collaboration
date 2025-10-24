@@ -110,9 +110,10 @@ View all authors and their books at a glance.
 
 ## Code Snippets
 
-### Book Model – Relationship
+## 🧩 Book Model – Relationship
+**File:** `app/Models/Book.php`
+
 ```php
-// app/Models/Book.php
 protected $fillable = ['title', 'author_id', 'category', 'publication_year'];
 
 public function author()
@@ -121,10 +122,15 @@ public function author()
 }
 
 
+
+
+---
+
 ```markdown
-### Search & Pagination in Controller
+## 🔍 Search & Pagination in Controller
+**File:** `app/Http/Controllers/BookController.php`
+
 ```php
-// app/Http/Controllers/BookController.php
 $books = Book::with('author')
     ->when($search, function ($query, $search) {
         return $query->where('title', 'like', "%{$search}%")
@@ -135,10 +141,16 @@ $books = Book::with('author')
 
 
 
+
+---
+
 ```markdown
-### Pagination Links in Blade
+## 📄 Pagination Links in Blade
+**File:** `resources/views/books/index.blade.php`
+
 ```blade
 {{ $books->appends(['search' => $search])->links() }}
+
 
 
 
